@@ -3,7 +3,7 @@ import { router } from "./router";
 
 export function App() {
   return (
-    <div className='dark'>
+    <div className='dark h-[110vh] bg-gray-800'>
       <RouterProvider router={router} />
     </div>
   );
