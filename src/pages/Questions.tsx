@@ -1,14 +1,37 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { api } from "../utils/api";
 
 export function Questions() {
   const { register, watch, reset, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const watchTypeQuestion = watch("type-question", false);
+  const watchTypeQuestion = watch("type_question", false);
 
-  function handleCreateQuestion(data: any) {
-    console.log(data);
+  async function handleCreateQuestion({
+    type_question,
+    subject,
+    description,
+    essay_answer,
+    choice_01,
+    choice_02,
+    choice_03,
+    choice_04,
+    choice_05,
+    correct,
+  }: any) {
+    await api.post("/questions/create", {
+      type_question,
+      subject,
+      description,
+      essay_answer,
+      choice_01,
+      choice_02,
+      choice_03,
+      choice_04,
+      choice_05,
+      correct,
+    });
     reset();
     navigate("/success");
   }
@@ -21,12 +44,12 @@ export function Questions() {
         </h1>
         <form onSubmit={handleSubmit(handleCreateQuestion)}>
           <div className='flex justify-between mb-2'>
-            <label className='inline-block text-xl p-2' htmlFor='type-question'>
+            <label className='inline-block text-xl p-2' htmlFor='type_question'>
               Selecione o tipo de questão:
             </label>
             <select
               className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-              {...register("type-question")}>
+              {...register("type_question")}>
               <option value='none'>Tipo</option>
               <option value='ESSAY'>Dissertativa</option>
               <option value='MULTIPLE_CHOICE'>Múltipla-escolha</option>
@@ -43,7 +66,7 @@ export function Questions() {
               required
             />
           </div>
-          <label className='block p-2 text-xl' htmlFor='question'>
+          <label className='block p-2 text-xl' htmlFor='description'>
             Escreva o enunciado da questão...
           </label>
           <textarea
@@ -51,7 +74,7 @@ export function Questions() {
             rows={5}
             cols={72}
             maxLength={200}
-            {...register("question")}
+            {...register("description")}
             required
           />
 
@@ -68,7 +91,7 @@ export function Questions() {
                 rows={5}
                 cols={72}
                 maxLength={180}
-                {...register("essay-answer")}
+                {...register("essay_answer")}
                 required
               />
               <div className='w-full flex justify-center'>
@@ -81,72 +104,72 @@ export function Questions() {
           {watchTypeQuestion === "MULTIPLE_CHOICE" ? (
             <>
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='choice-01'>
+                <label className='inline-block text-xl p-2' htmlFor='choice_01'>
                   Alternativa 01
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("choice-01")}
+                  {...register("choice_01")}
                   type='text'
                   required
                 />
               </div>
 
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='choice-02'>
+                <label className='inline-block text-xl p-2' htmlFor='choice_02'>
                   Alternativa 02
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("choice-02")}
+                  {...register("choice_02")}
                   type='text'
                   required
                 />
               </div>
 
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='choice-03'>
+                <label className='inline-block text-xl p-2' htmlFor='choice_03'>
                   Alternativa 03
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("choice-03")}
+                  {...register("choice_03")}
                   type='text'
                   required
                 />
               </div>
 
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='choice-04'>
+                <label className='inline-block text-xl p-2' htmlFor='choice_04'>
                   Alternativa 04
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("choice-04")}
+                  {...register("choice_04")}
                   type='text'
                   required
                 />
               </div>
 
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='choice-05'>
+                <label className='inline-block text-xl p-2' htmlFor='choice_05'>
                   Alternativa 05
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("choice-05")}
+                  {...register("choice_05")}
                   type='text'
                   required
                 />
               </div>
 
               <div className='flex justify-between mb-2'>
-                <label className='inline-block text-xl p-2' htmlFor='answer'>
+                <label className='inline-block text-xl p-2' htmlFor='correct'>
                   Resposta Correta
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  {...register("answer")}
+                  {...register("correct")}
                   type='text'
                   required
                 />
