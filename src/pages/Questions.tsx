@@ -1,19 +1,16 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export function Questions() {
-  const {
-    register,
-    watch,
-    reset,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const { register, watch, reset, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const watchTypeQuestion = watch("type-question", false);
 
   function handleCreateQuestion(data: any) {
     console.log(data);
     reset();
+    navigate("/success");
   }
 
   return (
@@ -43,6 +40,7 @@ export function Questions() {
               className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
               type='text'
               {...register("subject")}
+              required
             />
           </div>
           <label className='block p-2 text-xl' htmlFor='question'>
@@ -54,6 +52,7 @@ export function Questions() {
             cols={72}
             maxLength={200}
             {...register("question")}
+            required
           />
 
           {watchTypeQuestion === "none" ? (
@@ -70,6 +69,7 @@ export function Questions() {
                 cols={72}
                 maxLength={180}
                 {...register("essay-answer")}
+                required
               />
               <div className='w-full flex justify-center'>
                 <button className='my-4 py-4 px-10 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md text-lg dark:hover:bg-gray-600 transition'>
@@ -86,8 +86,9 @@ export function Questions() {
                 </label>
                 <input
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
-                  type='text'
                   {...register("choice-01")}
+                  type='text'
+                  required
                 />
               </div>
 
@@ -99,6 +100,7 @@ export function Questions() {
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
                   {...register("choice-02")}
                   type='text'
+                  required
                 />
               </div>
 
@@ -110,6 +112,7 @@ export function Questions() {
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
                   {...register("choice-03")}
                   type='text'
+                  required
                 />
               </div>
 
@@ -121,6 +124,7 @@ export function Questions() {
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
                   {...register("choice-04")}
                   type='text'
+                  required
                 />
               </div>
 
@@ -132,6 +136,7 @@ export function Questions() {
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
                   {...register("choice-05")}
                   type='text'
+                  required
                 />
               </div>
 
@@ -143,6 +148,7 @@ export function Questions() {
                   className='bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md p-2'
                   {...register("answer")}
                   type='text'
+                  required
                 />
               </div>
 
