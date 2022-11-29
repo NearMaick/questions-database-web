@@ -13,7 +13,7 @@ export function Login() {
   const { register, watch, reset, handleSubmit } = useForm<FormValues>();
   async function handleAuthenticate({ email, password }: FormValues) {
     signIn({ email, password });
-    navigate("/questions");
+    navigate("/dashboard/questions");
   }
 
   return (

@@ -11,11 +11,13 @@ export function PrivateRoutes() {
   }
 }
 
-// element={
-//   isPrivate === !!educator ? (
-//     <Component />
-//   ) : (
-//     <Navigate to={{ pathname: isPrivate ? "/" : "questions" }} />
-//   )
-// }
+export function PublicRoutes() {
+  const { educator } = useAuth();
+
+  if (educator) {
+    return <Navigate to='/dashboard/questions' />;
+  } else {
+    return <Outlet />;
+  }
+}
 

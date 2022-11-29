@@ -50,7 +50,6 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     });
 
     const { token, educator } = response.data;
-    console.log({ token, educator });
 
     localStorage.setItem(storageEducatorToken, token);
     localStorage.setItem(storageEducatorData, JSON.stringify(educator));

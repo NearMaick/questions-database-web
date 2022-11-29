@@ -7,16 +7,19 @@ import { Educators } from "../pages/Educators";
 import { Login } from "../pages/Login";
 import { Questions } from "../pages/Questions";
 import { Success } from "../pages/Success";
-import { PrivateRoutes } from "./PrivateRoutes";
+import { PrivateRoutes, PublicRoutes } from "./Routes";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<Login />} />,
-      <Route path='/' element={<PrivateRoutes />}>
-        <Route path='/educators' element={<Educators />} />,
-        <Route path='/questions' element={<Questions />} />,
-        <Route path='/success' element={<Success />} />,
+      <Route errorElement path='/' element={<PublicRoutes />}>
+        <Route path='/' element={<Login />} />,
+      </Route>
+
+      <Route path='/dashboard' element={<PrivateRoutes />}>
+        <Route path='/dashboard/educators' element={<Educators />} />,
+        <Route path='/dashboard/questions' element={<Questions />} />,
+        <Route path='/dashboard/success' element={<Success />} />,
       </Route>
     </>
   )
