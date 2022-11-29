@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 interface FormValues {
@@ -8,9 +9,11 @@ interface FormValues {
 
 export function Login() {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
   const { register, watch, reset, handleSubmit } = useForm<FormValues>();
   async function handleAuthenticate({ email, password }: FormValues) {
     signIn({ email, password });
+    navigate("/questions");
   }
 
   return (

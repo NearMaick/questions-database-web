@@ -22,8 +22,8 @@ interface IAuthProviderProps {
   children: ReactNode;
 }
 
-const storageEducatorToken = "@GoBarber:token";
-const storageEducatorData = "@GoBarber:user";
+const storageEducatorToken = "@QuestionsDatabase-1.0.0:token";
+const storageEducatorData = "@QuestionsDatabase-1.0.0:user";
 
 export const AuthContext = createContext<IAuthContextData>(
   {} as IAuthContextData
@@ -52,8 +52,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     const { token, educator } = response.data;
     console.log({ token, educator });
 
-    localStorage.setItem("@GoBarber:token", token);
-    localStorage.setItem("@GoBarber:user", JSON.stringify(educator));
+    localStorage.setItem(storageEducatorToken, token);
+    localStorage.setItem(storageEducatorData, JSON.stringify(educator));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
