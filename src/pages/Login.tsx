@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { api } from "../utils/api";
+import { useAuth } from "../hooks/useAuth";
 
 interface FormValues {
   email: string;
@@ -7,14 +7,10 @@ interface FormValues {
 }
 
 export function Login() {
+  const { signIn } = useAuth();
   const { register, watch, reset, handleSubmit } = useForm<FormValues>();
-
-  async function handleAuthenticate(data: FormValues) {
-    const response = await api.post("/educators/auth", {
-      email: data.email,
-      password: data.password,
-    });
-    console.log(response.data);
+  async function handleAuthenticate({ email, password }: FormValues) {
+    signIn({ email, password });
   }
 
   return (
