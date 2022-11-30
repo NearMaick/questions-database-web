@@ -34,7 +34,7 @@ export function Questions() {
       correct,
     });
     reset();
-    navigate("/success");
+    navigate("/dashboard/success");
   }
 
   return (
