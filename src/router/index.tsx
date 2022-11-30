@@ -3,9 +3,10 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import { Dashboard } from "../pages/Dashboard";
 import { Educators } from "../pages/Educators";
 import { Login } from "../pages/Login";
-import { Questions } from "../pages/Questions";
+import { QuestionCreate } from "../pages/QuestionCreate";
 import { Success } from "../pages/Success";
 import { PrivateRoutes, PublicRoutes } from "./Routes";
 
@@ -17,8 +18,13 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route path='/dashboard' element={<PrivateRoutes />}>
+        <Route path='/dashboard' element={<Dashboard />} />,
+        <Route
+          path='/dashboard/questions/create'
+          element={<QuestionCreate />}
+        />
+        ,
         <Route path='/dashboard/educators' element={<Educators />} />,
-        <Route path='/dashboard/questions' element={<Questions />} />,
         <Route path='/dashboard/success' element={<Success />} />,
       </Route>
     </>

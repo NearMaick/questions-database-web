@@ -1,3 +1,10 @@
+import { Container } from "../components/styles/Container";
+
 export function Success() {
-  return <h1>Sucesso</h1>;
+  return (
+    <Container>
+      <h1>Sucesso</h1>
+    </Container>
+  );
 }
+

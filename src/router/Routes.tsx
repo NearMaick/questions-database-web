@@ -15,7 +15,7 @@ export function PublicRoutes() {
   const { educator } = useAuth();
 
   if (educator) {
-    return <Navigate to='/dashboard/questions' />;
+    return <Navigate to='/dashboard' />;
   } else {
     return <Outlet />;
   }
