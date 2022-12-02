@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Container } from "../components/styles/Container";
 import { useAuth } from "../hooks/useAuth";
 
@@ -13,7 +13,7 @@ export function Login() {
   const { register, handleSubmit } = useForm<FormValues>();
   async function handleAuthenticate({ email, password }: FormValues) {
     signIn({ email, password });
-    return <Navigate to='/dashboard' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (

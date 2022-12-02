@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import { redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Container } from "../components/styles/Container";
-import { api } from "../utils/api";
 
 interface ICreateQuestionRequestProps {
   type_question: "ESSAY" | "MULTIPLE_CHOICE";
@@ -34,20 +33,20 @@ export function QuestionCreate() {
     choice_05,
     correct,
   }: ICreateQuestionRequestProps) {
-    await api.post("/questions/create", {
-      type_question,
-      subject,
-      description,
-      essay_answer,
-      choice_01,
-      choice_02,
-      choice_03,
-      choice_04,
-      choice_05,
-      correct,
-    });
+    // await api.post("/questions/create", {
+    //   type_question,
+    //   subject,
+    //   description,
+    //   essay_answer,
+    //   choice_01,
+    //   choice_02,
+    //   choice_03,
+    //   choice_04,
+    //   choice_05,
+    //   correct,
+    // });
     reset();
-    redirect("/dashboard/success");
+    <Redirect to='/dashboard' />;
   }
 
   return (
