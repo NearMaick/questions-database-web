@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Container } from "../components/styles/Container";
 import { useAuth } from "../hooks/useAuth";
 
@@ -10,10 +10,11 @@ interface FormValues {
 
 export function Login() {
   const { signIn } = useAuth();
+  const history = useHistory();
   const { register, handleSubmit } = useForm<FormValues>();
   async function handleAuthenticate({ email, password }: FormValues) {
     signIn({ email, password });
-    return <Redirect to='/dashboard' />;
+    history.push("/dashboard");
   }
 
   return (
