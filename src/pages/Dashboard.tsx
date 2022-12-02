@@ -12,7 +12,7 @@ export function Dashboard() {
       </div>
       <div className='pb-2 leading-relaxed flex flex-col'>
         <Link to='/dashboard/questions/create'>Criar uma questão:</Link>
-        <Link to=''>Listar questões:</Link>
+        <Link to='/dashboard/questions/list'>Listar questões:</Link>
         <Link to=''>Editar uma de suas questões:</Link>
       </div>
     </Container>
