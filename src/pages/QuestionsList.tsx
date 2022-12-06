@@ -10,7 +10,7 @@ export function QuestionsList() {
   const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState([]);
 
   function handleListQuantityEssayQuestions(
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) {
     setIsSubscribed(true);
     clearTimeout(debounceTimer);
@@ -29,7 +29,7 @@ export function QuestionsList() {
   }
 
   function handleListQuantityMultipleChoiceQuestions(
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) {
     setIsSubscribed(true);
     clearTimeout(debounceTimer);
@@ -57,21 +57,51 @@ export function QuestionsList() {
     <div className='text-gray-100'>
       <h1>Lista de questões</h1>
       <h2>Quantas questões dissertativas deseja listar?</h2>
-      <input
+      <select
         className='bg-gray-800 text-gray-200'
-        type='number'
-        onChange={(event) => handleListQuantityEssayQuestions(event)}
+        name=''
         id=''
-      />
+        onChange={(event) => handleListQuantityEssayQuestions(event)}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+        <option value='11'>11</option>
+        <option value='12'>12</option>
+        <option value='13'>13</option>
+        <option value='14'>14</option>
+        <option value='15'>15</option>
+      </select>
       <pre>{JSON.stringify(essayQuestions, null, 2)}</pre>
 
       <h2>Quantas questões dissertativas deseja listar?</h2>
-      <input
+      <select
         className='bg-gray-800 text-gray-200'
-        type='number'
-        onChange={(event) => handleListQuantityMultipleChoiceQuestions(event)}
+        name=''
         id=''
-      />
+        onChange={(event) => handleListQuantityMultipleChoiceQuestions(event)}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+        <option value='11'>11</option>
+        <option value='12'>12</option>
+        <option value='13'>13</option>
+        <option value='14'>14</option>
+        <option value='15'>15</option>
+      </select>
       <pre>{JSON.stringify(multipleChoiceQuestions, null, 2)}</pre>
       <Link to='/dashboard'>Voltar ao dashboard</Link>
     </div>
