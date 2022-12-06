@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
-import { Container } from "../components/styles/Container";
-import { useQuestions } from "../hooks/useQuestions";
+import { useLoadQuestionsByType } from "../hooks/useQuestions";
+import { useLoadQuestionsBySubject } from "../hooks/useQuestionsBySubject";
 
 export function QuestionsList() {
-  const essayQuestions = useQuestions("ESSAY");
-  const multipleChoiceQuestions = useQuestions("MULTIPLE_CHOICE");
+  const essayQuestions = useLoadQuestionsByType("ESSAY");
+  const multipleChoiceQuestions = useLoadQuestionsByType("MULTIPLE_CHOICE");
+  const questionsBySubject = useLoadQuestionsBySubject("português");
 
   return (
-    <Container>
+    <div className='text-gray-100'>
       <h1>questions list</h1>
-      <pre>{JSON.stringify(essayQuestions.questions, null, 2)}</pre>
-      <pre>{JSON.stringify(multipleChoiceQuestions.questions, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(essayQuestions.questions, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(multipleChoiceQuestions.questions, null, 2)}</pre> */}
+      <pre>{JSON.stringify(questionsBySubject.questions, null, 2)}</pre>
 
       <Link to='/dashboard'>Voltar ao dashboard</Link>
-    </Container>
+    </div>
   );
 }
 
