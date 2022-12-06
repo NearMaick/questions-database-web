@@ -14,7 +14,7 @@ interface ISignInCredentials {
 interface IAuthContextData {
   educator: IEducator;
   signIn(credentials: ISignInCredentials): Promise<void>;
-  // signOut(): void;
+  signOut(): void;
   // updateUser(user: IEducator): void;
 }
 
@@ -59,9 +59,16 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     setEducatorLoginData({ token, educator });
   }
 
+  function signOut() {
+    localStorage.removeItem(storageEducatorToken);
+    localStorage.removeItem(storageEducatorData);
+
+    setEducatorLoginData({});
+  }
+
   return (
     <AuthContext.Provider
-      value={{ educator: educatorLoginData.educator, signIn }}>
+      value={{ educator: educatorLoginData.educator, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
