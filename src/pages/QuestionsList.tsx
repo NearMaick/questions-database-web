@@ -1,13 +1,33 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { api } from "../utils/api";
 
 let debounceTimer: NodeJS.Timeout;
 
+interface IQuestionsProps {
+  id: string;
+  educator_id: string;
+  typeQuestion: string;
+  subject: string;
+  description: string;
+  answer: string[];
+  correct: string;
+}
+
+interface IListQuestions {
+  essay_questions: string[];
+  multiple_choice_questions: string[];
+}
+
 export function QuestionsList() {
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [essayQuestions, setEssayQuestions] = useState([]);
-  const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState([]);
+  const [essayQuestions, setEssayQuestions] = useState<IQuestionsProps[]>([]);
+  const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState<
+    IQuestionsProps[]
+  >([]);
+
+  const { register, watch, reset, handleSubmit } = useForm();
 
   function handleListQuantityEssayQuestions(
     event: ChangeEvent<HTMLSelectElement>
@@ -53,11 +73,25 @@ export function QuestionsList() {
     return () => setIsSubscribed(false);
   }, [isSubscribed]);
 
+  function handleCreateListQuestions({
+    essay_questions,
+    multiple_choice_questions,
+  }: IListQuestions) {
+    const questions = essay_questions.concat(multiple_choice_questions);
+
+    const updateQuestionsToArray = questions;
+    const itemsJSON = JSON.stringify({ questions: updateQuestionsToArray });
+
+    localStorage.setItem("@QuestionsDatabase-1.0.0:questions-list", itemsJSON);
+  }
+
   return (
     <div className='text-gray-100 w-full'>
       <h1>Lista de questões</h1>
 
-      <div className='grid grid-cols-2 gap-2 bg-gray-800'>
+      <form
+        onSubmit={handleSubmit(handleCreateListQuestions as any)}
+        className='grid grid-cols-2 gap-2 bg-gray-800'>
         <div>
           <h2>Quantas questões dissertativas deseja listar?</h2>
           <select
@@ -81,7 +115,19 @@ export function QuestionsList() {
             <option value='14'>14</option>
             <option value='15'>15</option>
           </select>
-          <pre>{JSON.stringify(essayQuestions, null, 2)}</pre>
+          <br />
+          {essayQuestions.map((question) => (
+            <Fragment key={question.id}>
+              <input
+                type='checkbox'
+                id={question.id}
+                {...register("essay_questions")}
+                value={question.id}
+              />
+              <label htmlFor={question.id}>{question.description}</label>
+              <br />
+            </Fragment>
+          ))}
         </div>
 
         <div>
@@ -109,9 +155,22 @@ export function QuestionsList() {
             <option value='14'>14</option>
             <option value='15'>15</option>
           </select>
-          <pre>{JSON.stringify(multipleChoiceQuestions, null, 2)}</pre>
+          <br />
+          {multipleChoiceQuestions.map((question) => (
+            <Fragment key={question.id}>
+              <input
+                type='checkbox'
+                id={question.id}
+                {...register("multiple_choice_questions")}
+                value={question.id}
+              />
+              <label htmlFor={question.id}>{question.description}</label>
+              <br />
+            </Fragment>
+          ))}
         </div>
-      </div>
+        <button type='submit'>enviar</button>
+      </form>
 
       <div className='w-full bg-gray-800'>
         <Link to='/dashboard' className='w-full'>
