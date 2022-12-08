@@ -1,6 +1,6 @@
 import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { api } from "../utils/api";
 
 let debounceTimer: NodeJS.Timeout;
@@ -28,6 +28,7 @@ export function QuestionsList() {
   >([]);
 
   const { register, watch, reset, handleSubmit } = useForm();
+  const history = useHistory();
 
   function handleListQuantityEssayQuestions(
     event: ChangeEvent<HTMLSelectElement>
@@ -83,6 +84,8 @@ export function QuestionsList() {
     const itemsJSON = JSON.stringify({ questions: updateQuestionsToArray });
 
     localStorage.setItem("@QuestionsDatabase-1.0.0:questions-list", itemsJSON);
+
+    history.push("/questions/generate");
   }
 
   return (
@@ -131,7 +134,7 @@ export function QuestionsList() {
         </div>
 
         <div>
-          <h2>Quantas questões dissertativas deseja listar?</h2>
+          <h2>Quantas questões múltipla-escolha deseja listar?</h2>
           <select
             className='bg-gray-800 text-gray-200'
             name=''
